@@ -1,36 +1,35 @@
 @if ($paginator->hasPages())
-<ul class="flex justify-between">
-    <!-- prev -->
+<nav aria-label="Page navigation example">
+
+    <ul class="pagination">    <!-- prev -->
     @if ($paginator->onFirstPage())
-    <li class="w-16 px-2 py-1 text-center rounded border bg-gray-200">Prev</li>
+    <li class="page-item"><a class="page-link" >Prev</a></li>
     @else
-    <li class="w-16 px-2 py-1 text-center rounded border shadow bg-white cursor-pointer" wire:click="previousPage">Prev</li>
+    <li class="page-item" ><a class="page-link"wire:click="previousPage">Prev</a></li>
     @endif
     <!-- prev end -->
 
     <!-- numbers -->
     @foreach ($elements as $element)
-    <div class="flex">
         @if (is_array($element))
         @foreach ($element as $page => $url)
         @if ($page == $paginator->currentPage())
-        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow bg-blue-500 text-white cursor-pointer" wire:click="gotoPage({{$page}})">{{$page}}</li>
+        <li class="page-item"><a class="page-link"wire:click="gotoPage({{$page}})">{{$page}}</a></li>
         @else
-        <li class="mx-2 w-10 px-2 py-1 text-center rounded border shadow bg-white cursor-pointer" wire:click="gotoPage({{$page}})">{{$page}}</li>
+        <li class="page-item"><a class="page-link"wire:click="gotoPage({{$page}})">{{$page}}</a></li>
         @endif
         @endforeach
         @endif
-    </div>
+
     @endforeach
     <!-- end numbers -->
-
-
     <!-- next  -->
     @if ($paginator->hasMorePages())
-    <li class="w-16 px-2 py-1 text-center rounded border shadow bg-white cursor-pointer" wire:click="nextPage">Next</li>
+    <li class="page-item"><a class="page-link" wire:click="nextPage">Next</a></li>
     @else
-    <li class="w-16 px-2 py-1 text-center rounded border bg-gray-200">Next</li>
+    <li class="page-item"><a class="page-link">Next</a></li>
     @endif
     <!-- next end -->
 </ul>
+</nav>
 @endif
